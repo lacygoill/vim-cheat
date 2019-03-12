@@ -1,8 +1,16 @@
-leader	$VIMRUNTIME/doc/map.txt	/*<leader>*
-registers	$VIMRUNTIME/doc/change.txt	/*registers*
-VIMRUNTIME/doc/motion.txt	$VIMRUNTIME/doc/motion.txt	/*motion.txt*
-text-objects	$VIMRUNTIME/doc/motion.txt	/*text-objects*
-VIMRUNTIME/doc/pattern.txt	$VIMRUNTIME/doc/pattern.txt	/*pattern.txt*
-VIMRUNTIME/doc/cmdline.txt	$VIMRUNTIME/doc/cmdline.txt	/*cmdline.txt*
-variables	$VIMRUNTIME/doc/eval.txt	/*variables*
-VIMRUNTIME/doc/options.txt	$VIMRUNTIME/doc/options.txt	/*options.txt*
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/ec7b647/
+<tab>	autoload/cheat40.vim	/^    nno  <buffer><nowait><silent>  <tab> <c-w><c-p>$/;"	m
+Cheat40	plugin/cheat40.vim	/^com! -bar -nargs=0 -bang Cheat40 call cheat40#open(<bang>0)$/;"	c
+b:current_syntax	syntax/cheat40.vim	/^let b:current_syntax = 'cheat40'$/;"	v
+cheat40#open	autoload/cheat40.vim	/^fu! cheat40#open(newtab) abort "{{{1$/;"	f
+g:loaded_cheatsheet	plugin/cheat40.vim	/^let g:loaded_cheatsheet = 1$/;"	v
+g?	plugin/cheat40.vim	/^nno <silent><unique> g? :<c-u>Cheat40<cr>$/;"	m
+q	autoload/cheat40.vim	/^    nno  <buffer><nowait><silent>  q <c-w><c-p>@=winnr('#')<cr><c-w>c$/;"	m
+s:cheat40_dir	autoload/cheat40.vim	/^let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')$/;"	v
+s:split	autoload/cheat40.vim	/^fu! s:split(path) abort "{{{1$/;"	f

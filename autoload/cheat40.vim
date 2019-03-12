@@ -1,44 +1,36 @@
-" Author:       Lifepillar
-" Maintainer:   Lifepillar
-" License:      Distributed under the same terms as Vim itself. See :help license.
-
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
-" Courtesy of Pathogen
-function! s:slash() abort
-  return !exists("+shellslash") || &shellslash ? '/' : '\'
-endfunction
+fu! s:split(path) abort "{{{1
+    " Split a path into a list. Code from Pathogen.
+    if type(a:path) == type([]) | return a:path | endif
+    if empty(a:path) | return [] | endif
+    let split = split(a:path, '\\\@<!\%(\\\\\)*\zs,')
+    return map(split, {i,v -> substitute(v, '\\\([\\,]\)','\1','g')})
+endfu
 
-
-" Split a path into a list. Code from Pathogen.
-function! s:split(path) abort
-  if type(a:path) == type([]) | return a:path | endif
-  if empty(a:path) | return [] | endif
-  let split = split(a:path,'\\\@<!\%(\\\\\)*\zs,')
-  return map(split,'substitute(v:val,''\\\([\\,]\)'',''\1'',"g")')
-endfunction
-
-fun! cheat40#open(newtab)
-  if a:newtab
-    tabnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
-  else
-    botright 40vnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
-  endif
-  if get(g:, 'cheat40_use_default', 1)
-    execute '$read' s:cheat40_dir.s:slash().'cheat40.txt'
-  endif
-  for glob in reverse(s:split(&runtimepath))
-    for cs in filter(map(filter(split(glob(glob), "\n"), 'v:val !~ "cheat40"'), 'v:val.s:slash()."cheat40.txt"'), 'filereadable(v:val)')
-      execute "$read" cs
+fu! cheat40#open(newtab) abort "{{{1
+    if a:newtab
+        tabnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
+    else
+        botright 43vnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
+    endif
+    exe '$read ' . s:cheat40_dir . '/cheat40.txt'
+    for glob in reverse(s:split(&runtimepath))
+        for cs in filter(map(filter(split(glob(glob), '\n'),
+           \ {i,v -> v !~ 'cheat40'}),
+           \ {i,v -> v . '/cheat40.txt'}),
+           \ {i,v -> filereadable(v)})
+            exe '$read ' . cs
+        endfor
     endfor
-  endfor
-  norm ggd_
-  setlocal foldlevel=1 foldmethod=marker foldtext=substitute(getline(v:foldstart),'\\s\\+{{{.*$','','')
-  setlocal concealcursor=nc conceallevel=3
-  setlocal expandtab nonumber norelativenumber nospell nowrap textwidth=40
-  setlocal fileencoding=utf-8 filetype=cheat40 nomodifiable
-  setlocal iskeyword=@,48-57,-,/,.,192-255
-  execute "setlocal" "tags=".s:cheat40_dir.s:slash()."tags"
-  nnoremap <silent> <buffer> <tab> <c-w><c-p>
-  nnoremap <silent> <buffer> q <c-w><c-p>@=winnr("#")<cr><c-w>c
+    norm! ggd_
+    setl foldlevel=1 foldmethod=marker foldtext=substitute(getline(v:foldstart),'\\s\\+{'.'{{.*$','','')
+    setl concealcursor=nc conceallevel=3
+    setl expandtab nonumber norelativenumber nospell nowrap textwidth=40
+    setl fileencoding=utf-8 filetype=cheat40 nomodifiable
+    setl iskeyword=@,48-57,-,/,.,192-255
+    exe 'setl tags=' . s:cheat40_dir . '/tags'
+    nno  <buffer><nowait><silent>  <tab> <c-w><c-p>
+    nno  <buffer><nowait><silent>  q <c-w><c-p>@=winnr('#')<cr><c-w>c
 endf
+

@@ -1,15 +1,9 @@
-" Author:       Lifepillar
-" Maintainer:   Lifepillar
-" License:      Distributed under the same terms as Vim itself. See :help license.
-
-if exists("g:loaded_cheatsheet") || &cp || v:version < 700
-  finish
+if exists('g:loaded_cheatsheet')
+    finish
 endif
 let g:loaded_cheatsheet = 1
 
-command -bar -nargs=0 -bang Cheat40 call cheat40#open("<bang>" ==# '!')
+com! -bar -nargs=0 -bang Cheat40 call cheat40#open(<bang>0)
 
-if mapcheck("<leader>?", "n") == ""
-  nmap <unique> <leader>? :<c-u>Cheat40<cr>
-endif
+nno <silent><unique> g? :<c-u>Cheat40<cr>
 
