@@ -3,7 +3,6 @@ if exists('g:autoloaded_cheat40')
 endif
 let g:autoloaded_cheat40 = 1
 
-" test
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 fu! s:split(path) abort "{{{1
