@@ -42,11 +42,11 @@ fu! cheat40#open(newtab) abort "{{{1
     1d_
     setl fdl=1 fdm=marker fdt=substitute(getline(v:foldstart),'\\s\\+{'.'{{.*$','','')
     setl cocu=nc cole=3
-    setl et nonumber nornu nospell nowrap tw=40
+    setl et nonu nornu nospell nowrap tw=40
     setl fileencoding=utf-8 ft=cheat40 noma
     setl isk=@,48-57,-,/,.,192-255
     exe 'setl tags=' . s:cheat40_dir . '/tags'
-    nno  <buffer><nowait><silent>  <tab> <c-w><c-p>
-    nno  <buffer><nowait><silent>  q <c-w><c-p>@=winnr('#')<cr><c-w>c
+    nno  <buffer><nowait><silent>  <tab>  <c-w><c-p>
+    nno  <buffer><nowait><silent>  q      <c-w><c-p>@=winnr('#')<cr><c-w>c
 endf
 
