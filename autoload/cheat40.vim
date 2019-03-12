@@ -1,3 +1,8 @@
+if exists('g:autoloaded_cheat40')
+    finish
+endif
+let g:autoloaded_cheat40 = 1
+
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 fu! s:split(path) abort "{{{1
@@ -10,7 +15,7 @@ endfu
 
 fu! cheat40#open(newtab) abort "{{{1
     if a:newtab
-        tabnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
+        tabnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     else
         " Why 43 instead of 40?{{{
         "
@@ -23,7 +28,7 @@ fu! cheat40#open(newtab) abort "{{{1
         "     botright 40vnew +setlocal\ scl=no\ buftype=nofile...
         "                                ^^^^^^
         "}}}
-        botright 43vnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
+        bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
     exe '$read ' . s:cheat40_dir . '/cheat40.txt'
     for glob in reverse(s:split(&runtimepath))
@@ -34,12 +39,12 @@ fu! cheat40#open(newtab) abort "{{{1
             exe '$read ' . cs
         endfor
     endfor
-    norm! ggd_
-    setl foldlevel=1 foldmethod=marker foldtext=substitute(getline(v:foldstart),'\\s\\+{'.'{{.*$','','')
-    setl concealcursor=nc conceallevel=3
-    setl expandtab nonumber norelativenumber nospell nowrap textwidth=40
-    setl fileencoding=utf-8 filetype=cheat40 nomodifiable
-    setl iskeyword=@,48-57,-,/,.,192-255
+    1d_
+    setl fdl=1 fdm=marker fdt=substitute(getline(v:foldstart),'\\s\\+{'.'{{.*$','','')
+    setl cocu=nc cole=3
+    setl et nonumber nornu nospell nowrap tw=40
+    setl fileencoding=utf-8 ft=cheat40 noma
+    setl isk=@,48-57,-,/,.,192-255
     exe 'setl tags=' . s:cheat40_dir . '/tags'
     nno  <buffer><nowait><silent>  <tab> <c-w><c-p>
     nno  <buffer><nowait><silent>  q <c-w><c-p>@=winnr('#')<cr><c-w>c

@@ -9,6 +9,7 @@
 Cheat40	plugin/cheat40.vim	/^com! -bar -nargs=0 -bang Cheat40 call cheat40#open(<bang>0)$/;"	c
 b:current_syntax	syntax/cheat40.vim	/^let b:current_syntax = 'cheat40'$/;"	v
 cheat40#open	autoload/cheat40.vim	/^fu! cheat40#open(newtab) abort "{{{1$/;"	f
+g:autoloaded_cheat40	autoload/cheat40.vim	/^let g:autoloaded_cheat40 = 1$/;"	v
 g:loaded_cheatsheet	plugin/cheat40.vim	/^let g:loaded_cheatsheet = 1$/;"	v
 g?	plugin/cheat40.vim	/^nno <silent><unique> g? :<c-u>Cheat40<cr>$/;"	m
 q	autoload/cheat40.vim	/^    nno  <buffer><nowait><silent>  q <c-w><c-p>@=winnr('#')<cr><c-w>c$/;"	m
