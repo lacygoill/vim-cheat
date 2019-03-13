@@ -1,4 +1,3 @@
-Press q to dismiss, <Tab> to lose focus
 About {{{2
   Abbreviations used in descriptions:
 

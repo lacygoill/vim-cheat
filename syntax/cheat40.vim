@@ -10,7 +10,6 @@ syn match   Cheat40Command      /\%26v.*\%<41v./ contains=Cheat40Mode,Cheat40Ang
 exe 'syn match   Cheat40Header  /^.*{' . '{{\d*$/ contains=Cheat40BeginSection'
 exe 'syn region  Cheat40About   start=/^About.*{' . '{{\d*$/ end=/^}' . '}}$/'
     \ ' keepend contains=Cheat40BeginSection,Cheat40EndSection,Cheat40Tag,Cheat40Angle,Cheat40DblAngle'
-syn match   Cheat40FirstLine    /\%1l.*/
 exe 'syn match   Cheat40BeginSection /{' . '{{\d*/ contained conceal'
 syn match   Cheat40EndSection   /^}}}$/ conceal
 syn match   Cheat40Tag          /`[^` \t]\+`/hs=s+1,he=e-1 contained contains=Cheat40Backtick,Cheat40Runtime
@@ -26,7 +25,6 @@ hi link Cheat40Descr        Normal
 hi link Cheat40Command      Constant
 hi link Cheat40Header       Title
 hi link Cheat40About        Comment
-hi link Cheat40FirstLine    Statement
 hi link Cheat40BeginSection Ignore
 hi link Cheat40EndSection   Ignore
 hi link Cheat40Tag          Tag
