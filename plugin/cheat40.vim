@@ -1,9 +1,9 @@
-if exists('g:loaded_cheatsheet')
+if exists('g:loaded_cheat')
     finish
 endif
-let g:loaded_cheatsheet = 1
+let g:loaded_cheat = 1
 
-com! -bar -nargs=0 -bang Cheat40 call cheat40#open(<bang>0)
+com! -bar -complete=custom,cheat40#completion -nargs=? Cheat  call cheat40#open(<bang>0, <f-args>)
 
-nno <silent><unique> g? :<c-u>Cheat40<cr>
+nno <silent><unique> g? :<c-u>Cheat<cr>
 

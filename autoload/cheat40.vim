@@ -6,6 +6,10 @@ let g:autoloaded_cheat40 = 1
 " /home/user/.vim/plugged/vim-cheat40
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
+fu! cheat40#completion(_a, _l, _p) abort "{{{1
+    return join(map(systemlist('fd cheat.txt ~/wiki'), {i,v -> fnamemodify(v, ':h:t')}), "\n")
+endfu
+
 fu! s:split(path) abort "{{{1
     " Split a path into a list. Code from Pathogen.
     if type(a:path) == type([]) | return a:path | endif
@@ -14,8 +18,7 @@ fu! s:split(path) abort "{{{1
     return map(split, {i,v -> substitute(v, '\\\([\\,]\)','\1','g')})
 endfu
 
-fu! cheat40#open(newtab) abort "{{{1
-    let current_dir = expand('%:p:h')
+fu! cheat40#open(newtab, ...) abort "{{{1
     if a:newtab
         tabnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     else
@@ -32,8 +35,8 @@ fu! cheat40#open(newtab) abort "{{{1
         "}}}
         bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
-    if current_dir =~# '/wiki/tmux'
-        exe '$read ' . expand('%:p:h') . '/cheat.txt'
+    if a:0
+        exe '$read ~/wiki/' . a:1 . '/cheat.txt'
     else
         exe '$read ' . s:cheat40_dir . '/cheat40.txt'
     endif
