@@ -3,6 +3,7 @@ if exists('g:autoloaded_cheat40')
 endif
 let g:autoloaded_cheat40 = 1
 
+" /home/user/.vim/plugged/vim-cheat40
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 fu! s:split(path) abort "{{{1
@@ -14,6 +15,7 @@ fu! s:split(path) abort "{{{1
 endfu
 
 fu! cheat40#open(newtab) abort "{{{1
+    let current_dir = expand('%:p:h')
     if a:newtab
         tabnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     else
@@ -30,7 +32,11 @@ fu! cheat40#open(newtab) abort "{{{1
         "}}}
         bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
-    exe '$read ' . s:cheat40_dir . '/cheat40.txt'
+    if current_dir =~# '/wiki/tmux'
+        exe '$read ' . expand('%:p:h') . '/cheat.txt'
+    else
+        exe '$read ' . s:cheat40_dir . '/cheat40.txt'
+    endif
     for glob in reverse(s:split(&runtimepath))
         for cs in filter(map(filter(split(glob(glob), '\n'),
            \ {i,v -> v !~ 'cheat40'}),
