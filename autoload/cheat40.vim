@@ -67,5 +67,8 @@ fu! cheat40#open(newtab, ...) abort "{{{1
     " mapping to reload cheatsheet
     let b:args = [a:newtab] + a:000
     nno  <buffer><nowait><silent>  r      :<c-u>call call('cheat40#open', b:args)<cr>
+    " mapping to edit source file
+    let b:source_file = a:0 ? '~/wiki/' . a:1 . '/cheat.txt' : ''
+    nno  <buffer><nowait><silent> -s      :<c-u>exe b:source_file isnot# '' ? 'sp ' . b:source_file : ''<cr>
 endf
 
