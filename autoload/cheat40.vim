@@ -19,6 +19,13 @@ fu! s:split(path) abort "{{{1
 endfu
 
 fu! cheat40#open(newtab, ...) abort "{{{1
+    " close possible existing cheatsheet;
+    " only one at a time should be visible;
+    " useful when reloading
+    if &ft is# 'cheat40'
+        close
+    endif
+
     if a:newtab
         tabnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     else
@@ -57,5 +64,8 @@ fu! cheat40#open(newtab, ...) abort "{{{1
     exe 'setl tags=' . s:cheat40_dir . '/tags'
     nno  <buffer><nowait><silent>  <tab>  <c-w><c-p>
     nno  <buffer><nowait><silent>  q      <c-w><c-p>@=winnr('#')<cr><c-w>c
+    " mapping to reload cheatsheet
+    let b:args = [a:newtab] + a:000
+    nno  <buffer><nowait><silent>  r      :<c-u>call call('cheat40#open', b:args)<cr>
 endf
 
