@@ -19,10 +19,13 @@ fu! s:split(path) abort "{{{1
 endfu
 
 fu! cheat40#open(newtab, ...) abort "{{{1
-    " close possible existing cheatsheet;
-    " only one at a time should be visible;
-    " useful when reloading
-    if &ft is# 'cheat40'
+    " special case: we're reading a cheatsheet in “fullscreen”, and we reload
+    if &ft is# 'cheat40' && winnr('$') == 1
+        enew
+    elseif &ft is# 'cheat40'
+        " close possible existing cheatsheet;
+        " only one at a time should be visible;
+        " useful when reloading
         close
     endif
 
