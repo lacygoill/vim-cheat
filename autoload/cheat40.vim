@@ -66,7 +66,7 @@ fu! cheat40#open(newtab, ...) abort "{{{1
     setl isk=@,48-57,-,/,.,192-255
     exe 'setl tags=' . s:cheat40_dir . '/tags'
     nno  <buffer><nowait><silent>  <tab>  <c-w><c-p>
-    nno  <buffer><nowait><silent>  q      <c-w><c-p>@=winnr('#')<cr><c-w>c
+    nno  <buffer><nowait><silent> q :<c-u>wincmd p <bar> exe winnr('#') . 'wincmd c'<cr>
     " mapping to reload cheatsheet
     let b:args = [a:newtab] + a:000
     nno  <buffer><nowait><silent>  r      :<c-u>call call('cheat40#open', b:args)<cr>
