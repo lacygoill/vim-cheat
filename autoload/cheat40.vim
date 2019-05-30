@@ -66,12 +66,20 @@ fu! cheat40#open(newtab, ...) abort "{{{1
     setl isk=@,48-57,-,/,.,192-255
     exe 'setl tags=' . s:cheat40_dir . '/tags'
     nno  <buffer><nowait><silent>  <tab>  <c-w><c-p>
-    nno  <buffer><nowait><silent> q :<c-u>wincmd p <bar> exe winnr('#') . 'wincmd c'<cr>
+    nno <buffer><nowait><silent> q :<c-u>call <sid>close_window()<cr>
     " mapping to reload cheatsheet
     let b:args = [a:newtab] + a:000
     nno  <buffer><nowait><silent>  r      :<c-u>call call('cheat40#open', b:args)<cr>
     " mapping to edit source file
     let b:source_file = a:0 ? '~/wiki/' . a:1 . '/cheat.txt' : ''
     nno  <buffer><nowait><silent> -s      :<c-u>exe b:source_file isnot# '' ? 'lefta 40vs +setl\ wfw ' . b:source_file : ''<cr>
-endf
+endfu
+
+fu! s:close_window() abort "{{{1
+    if reg_recording() isnot# ''
+        return feedkeys('q', 'int')[-1]
+    endif
+    wincmd p
+    exe winnr('#') . 'wincmd c'
+endfu
 
