@@ -7,10 +7,10 @@ syn sync fromstart
 
 syn match   Cheat40Descr        /\%1v.*\%<26v./
 syn match   Cheat40Command      /\%26v.*\%<41v./ contains=Cheat40Mode,Cheat40Angle,Cheat40DblAngle
-exe 'syn match   Cheat40Header  /^.*{' . '{{\d*$/ contains=Cheat40BeginSection'
-exe 'syn region  Cheat40About   start=/^About.*{' . '{{\d*$/ end=/^}' . '}}$/'
-    \ ' keepend contains=Cheat40BeginSection,Cheat40EndSection,Cheat40Tag,Cheat40Angle,Cheat40DblAngle'
-exe 'syn match   Cheat40BeginSection /{' . '{{\d*/ contained conceal'
+syn match   Cheat40Header  /^.*{{\%x7b\d*$/ contains=Cheat40BeginSection
+syn region  Cheat40About   start=/^About.*{{\%x7b\d*$/ end=/^}}\%x7d$/
+    \ keepend contains=Cheat40BeginSection,Cheat40EndSection,Cheat40Tag,Cheat40Angle,Cheat40DblAngle
+syn match   Cheat40BeginSection /{{\%x7b\d*/ contained conceal
 syn match   Cheat40EndSection   /^}}}$/ conceal
 syn match   Cheat40Tag          /`[^` \t]\+`/hs=s+1,he=e-1 contained contains=Cheat40Backtick,Cheat40Runtime
 syn match   Cheat40Backtick     /`/ contained conceal
