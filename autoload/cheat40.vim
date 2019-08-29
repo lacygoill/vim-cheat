@@ -7,7 +7,7 @@ let g:autoloaded_cheat40 = 1
 let s:cheat40_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 fu! cheat40#completion(_a, _l, _p) abort "{{{1
-    return join(map(systemlist('fd cheat.txt ~/wiki'), {i,v -> fnamemodify(v, ':h:t')}), "\n")
+    return join(map(systemlist('fd cheat.txt ~/wiki'), {_,v -> fnamemodify(v, ':h:t')}), "\n")
 endfu
 
 fu! s:split(path) abort "{{{1
@@ -15,7 +15,7 @@ fu! s:split(path) abort "{{{1
     if type(a:path) == type([]) | return a:path | endif
     if empty(a:path) | return [] | endif
     let split = split(a:path, '\\\@<!\%(\\\\\)*\zs,')
-    return map(split, {i,v -> substitute(v, '\\\([\\,]\)','\1','g')})
+    return map(split, {_,v -> substitute(v, '\\\([\\,]\)','\1','g')})
 endfu
 
 fu! cheat40#open(newtab, ...) abort "{{{1
@@ -46,33 +46,39 @@ fu! cheat40#open(newtab, ...) abort "{{{1
         bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
     if a:0
-        exe '$read ~/wiki/' . a:1 . '/cheat.txt'
+        exe '$read ~/wiki/'..a:1..'/cheat.txt'
     else
-        exe '$read ' . s:cheat40_dir . '/cheat40.txt'
+        exe '$read '..s:cheat40_dir..'/cheat40.txt'
     endif
     for glob in reverse(s:split(&runtimepath))
         for cs in filter(map(filter(split(glob(glob), '\n'),
-           \ {i,v -> v !~ 'cheat40'}),
-           \ {i,v -> v . '/cheat40.txt'}),
-           \ {i,v -> filereadable(v)})
-            exe '$read ' . cs
+           \ {_,v -> v !~ 'cheat40'}),
+           \ {_,v -> v..'/cheat40.txt'}),
+           \ {_,v -> filereadable(v)})
+            exe '$read '..cs
         endfor
     endfor
     1d_
-    setl fdl=1 fdm=marker fdt=substitute(getline(v:foldstart),'\\s\\+{'.'{{.*$','','')
+    setl fdl=1 fdm=marker fdt=substitute(getline(v:foldstart),'\\s\\+{'..'{{.*$','','')
     setl cocu=nc cole=3
     setl et nonu nornu nospell nowrap tw=40
     setl fileencoding=utf-8 ft=cheat40 noma
     setl isk=@,48-57,-,/,.,192-255
-    exe 'setl tags=' . s:cheat40_dir . '/tags'
+    exe 'setl tags='..s:cheat40_dir..'/tags'
     nno  <buffer><nowait><silent>  <tab>  <c-w><c-p>
+    nno  <buffer><nowait><silent>  <c-h>  :<c-u>echo 'press Tab'<cr>
     nno <buffer><nowait><silent> q :<c-u>call <sid>close_window()<cr>
     " mapping to reload cheatsheet
+    " TODO: position is lost after reload; distracting
     let b:args = [a:newtab] + a:000
     nno  <buffer><nowait><silent>  r      :<c-u>call call('cheat40#open', b:args)<cr>
     " mapping to edit source file
-    let b:source_file = a:0 ? '~/wiki/' . a:1 . '/cheat.txt' : ''
-    nno  <buffer><nowait><silent> -s      :<c-u>exe b:source_file isnot# '' ? 'lefta 40vs +setl\ wfw ' . b:source_file : ''<cr>
+    " TODO: add a little syntax highlighting and maybe some folding;
+    " otherwise it's hard to know where we are in a big cheatsheet;
+    " also set comment leader to `#` to be able to comment with `gc`
+    " (basically, we need to set an ad-hoc filetype to load a filetype and syntax plugins)
+    let b:source_file = a:0 ? '~/wiki/'..a:1..'/cheat.txt' : ''
+    nno  <buffer><nowait><silent> -s      :<c-u>exe b:source_file isnot# '' ? 'lefta 40vs +setl\ wfw '..b:source_file : ''<cr>
 endfu
 
 fu! s:close_window() abort "{{{1
@@ -80,6 +86,6 @@ fu! s:close_window() abort "{{{1
         return feedkeys('q', 'in')[-1]
     endif
     wincmd p
-    exe winnr('#') . 'wincmd c'
+    exe winnr('#')..'wincmd c'
 endfu
 
