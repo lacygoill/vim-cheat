@@ -1,4 +1,4 @@
-About {{{2
+About {{{1
   Abbreviations used in descriptions:
 
   »      Forwards/rightwards
@@ -51,7 +51,6 @@ About {{{2
   O    Operator (use in Visual mode, or
        before a motion or a text object)
   *    Acts on text under/after cursor
-}}}
 File {{{1
 New untitled document    :enew         N
 New/open file or dir     :e …          N
@@ -81,7 +80,7 @@ Quit without saving      :q!           N
 Ditto                    ZQ            N
 Save all and exit Vim    :xa           N
 Exit Vim without saving  :qa!          N
-File Explorer (Netrw) {{{2
+  File Explorer (Netrw) {{{
 Open file/directory      «CR»         *N
 Open in horizontal split o            *N
 Open in vertical split   v            *N
@@ -102,7 +101,7 @@ Switch file list format  i             N
 Exit file explorer       :Rex          N
 }}}
 Edit {{{1
-Basics {{{2
+  Basics {{{
 Back to normal mode      «Esc»      NIVC
 Ditto                    «C-[»      NIVC
 Cancel command/operation «C-c»      NIVC
@@ -161,7 +160,7 @@ Repeat last macro        @@            N
 Repeat last Ex command   @:            N
 Run cmd in all buffers   :bufdo ‹Cmd›  N
 Text {{{1
-Objects {{{2
+  Objects {{{
 Around word              aw            T
 Inside word              iw            T
 Around WORD              aW            T
@@ -235,7 +234,7 @@ Insert calculated expr.  «C-r»=        I
 Increment number         ‹n›«C-a»     *N
 Decrement number         ‹n›«C-x»     *N
 View {{{1
-Scrolling {{{2
+  Scrolling {{{
 Scroll down a page       «C-f»         N
 Scroll up a page         «C-b»         N
 Scroll down half a page  «C-d»         N
@@ -299,7 +298,7 @@ Browse command history   «C-f»         C
 # Use «C-c» to return to command prompt
 Browse » search patterns q/            N
 Browse « search patterns q?            N
-Differences {{{2
+  Differences {{{
 Use this file for diff   :diffthis     N
 Exit diff mode           :diffoff!     N
 Re-scan files for diffs  :diffupdate   N
@@ -311,7 +310,7 @@ Get differences          :diffget      V
 Put differences          :diffput      V
 }}}
 Go {{{1
-Basic movement {{{2
+  Basic movement {{{
 Left                     h             M
 Right                    l             M
 Up                       k             M

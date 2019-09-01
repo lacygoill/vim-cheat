@@ -8,7 +8,6 @@ first, because one typically wants to find how to execute a task, not what the
 meaning of a key sequence is (there is Vim's help for that). Syntax coloring and
 the use of `conceal` keep the cheat sheet clutter-free and easy to read.
 
-
 ## Installation
 
 If your Vim supports packages (`echo has('packages')` prints `1`), I strongly
@@ -18,7 +17,6 @@ recommend that you use them. Just clone this repo inside `pack/*/start`, e.g.,
     git clone https://github.com/lifepillar/vim-cheat40.git pack/bundle/start/cheat40
 
 Otherwise, use your preferred installation method.
-
 
 ## Extending the cheat sheet
 
