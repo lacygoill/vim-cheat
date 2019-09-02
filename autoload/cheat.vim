@@ -49,6 +49,13 @@ fu! cheat#open(newtab, ...) abort "{{{1
         bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
     if a:0
+        " FIXME: The file may not exist.
+        " If so, an uncaught error is raised. Catch it.
+        " Also:
+        "
+        "     $ cs foo
+        "     " error
+        "     " Vim should quit automatically
         exe '$read ~/wiki/'..a:1..'/cheat.txt'
     else
         exe '$read '..s:cheat_dir..'/cheat.txt'
@@ -77,7 +84,12 @@ fu! cheat#open(newtab, ...) abort "{{{1
     " TODO: Restore the autofolding state after we close the cheat window.{{{
     "
     " Check out how we dit it for `:Tldr`.
-    " We should probably define a library function to toggle the state of autofolding.
+    " We should probably define a library function to toggle the state of auto-open-folds.
+    "
+    " ---
+    "
+    " Also,  make sure  the auto-open-folds  persists  across the  reloads of  a
+    " cheatsheet (after we press `r`).
     "}}}
     " TODO: Doesn't work with our shell function `$ cs`.{{{
     "
