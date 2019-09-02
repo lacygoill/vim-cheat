@@ -44,8 +44,7 @@ fu! cheat#open(newtab, ...) abort "{{{1
         "                                ^^^^^^
         "}}}
         " TODO: If the  current tabpage contains  only 1 window with  an unnamed
-        " buffer, with no text, close it so  that the cheat window takes all the
-        " space. Or zoom the cheat window?
+        " buffer, with no text, use it instead of opening a new window.
         bo 43vnew +setl\ bt=nofile\ bh=hide\ nobl\ noswf\ wfw
     endif
     if a:0
