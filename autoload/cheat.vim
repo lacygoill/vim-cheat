@@ -4,8 +4,12 @@ endif
 let g:autoloaded_cheat = 1
 
 " TODO: The status line should display sth like `[cheat] tmux`.
+"
 " TODO: Edit the Vim cheatsheet so that it contains only info you wish to memorize.
 " Also, include some `:ls [flags]` commands, like `:ls u-`, `:ls a+`, ...
+"
+" TODO: Read  `~/wiki/vim/todo.md`, find a  general design for  scratch buffers,
+" and use it for cheat buffers.
 
 let s:cheat_dir = $HOME..'/wiki/cheat'
 
@@ -72,7 +76,7 @@ fu! cheat#populate(path) abort "{{{2
     " Also,  make sure  the auto-open-folds  persists  across the  reloads of  a
     " cheatsheet (after we press `r`).
     "}}}
-    " TODO: Doesn't work with our shell function `$ cs`.{{{
+    " TODO: Doesn't work with our shell function `cs`.{{{
     "
     " It calls Vim like this:
     "
