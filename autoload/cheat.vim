@@ -11,6 +11,14 @@ let g:autoloaded_cheat = 1
 " TODO: Read  `~/wiki/vim/todo.md`, find a  general design for  scratch buffers,
 " and use it for cheat buffers.
 
+" TODO: Maybe we should rename `:Cheat` into `:Cs`, to be consistent with `$ cs`.
+" Note that it would probably shadow `:cs` (short form of `:cscope`).
+
+" TODO: If you use a preview window, enable `'cul'`.
+" Otherwise, when you move with `j` and  `k`, you may not see anything happening
+" for quite some time if you're in a long fold.
+" You may end up thinking that sth is broken.
+
 let s:cheat_dir = $HOME..'/wiki/cheat'
 
 " Interface {{{1
