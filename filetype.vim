@@ -3,5 +3,5 @@ if exists('did_load_filetypes')
 endif
 
 augroup filetypedetect
-    au! BufRead,BufNewFile /tmp/*/cheat/* setf cheat
+    au! BufRead,BufNewFile $HOME/wiki/cheat/* setf cheat
 augroup END
