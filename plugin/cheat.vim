@@ -24,5 +24,5 @@ com! -bar -complete=custom,cheat#completion -nargs=? Cs call cheat#open(<f-args>
 
 " Mapping {{{1
 
-nno <silent><unique> g? :<c-u>Cheat<cr>
+nno <silent><unique> g? :<c-u>Cs<cr>
 

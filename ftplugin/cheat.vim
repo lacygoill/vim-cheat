@@ -38,38 +38,14 @@ setl nowrap
 "
 " ---
 "
+" It doesn't seem to cause an issue:
+"
 "     $ cs tmux
 "     :setl list
 "     C-l
 "     C-^
 "
 " `'list'` is set in the second window, even when we use `bh=delete`.
-" How is that possible?
-"
-" MWE:
-"
-"     $ vim -Nu NONE --cmd 'set rtp^=~/.vim/plugged/vim-cheat | filetype plugin on | setl list' -O ~/wiki/cheat/vim =(echo ~/wiki/cheat/vim)
-"     C-w C-w
-"     gf
-"
-" Why is `'list'` enabled in the second window?
-"
-" OTOH:
-"
-"     # include `setl list` in the current filetype plugin
-"     $ vim -Nu NONE --cmd 'set rtp^=~/.vim/plugged/vim-cheat | filetype plugin on' -O ~/wiki/cheat/vim =(echo ~/wiki/cheat/vim)
-"     C-w C-w
-"     gf
-"
-" This time, `'list'` is not enabled in the second window, which is expected.
-"
-" ---
-"
-"     $ echo '/tmp/pn.pn' >/tmp/file
-"     $ vim -Nu NONE --cmd 'filetype plugin on' /tmp/file
-"     :to vnew /tmp/pn.pn
-"     C-w C-w
-"     gf
 "}}}
 setl bh=hide nobl noswf ro wfw
 

@@ -2,6 +2,21 @@ if exists('b:current_syntax')
     finish
 endif
 
+" TODO: Conceal some syntax items installed by `vim-lg`.
+" Mainly (are there others?) `cheatCommentLeader` and `cheatCommentCodeBlock`.
+"
+" You could try sth like:
+"
+"     syn match cheatCommentLeader /\%(^\s*\)\@<=#\m/ contained conceal
+"                                                               ^^^^^^^
+"
+"     syn region cheatCommentCodeBlock matchgroup=Comment start=/#\m \{5,}/ end=/$/ concealends contained oneline keepend containedin=CheatComment
+"                                                                                   ^^^^^^^^^^^
+"
+" But I don't think it can be run from this script; it needs to be run later.
+" Also, regarding `cheatCommentCodeBlock`, it would  be nice to only conceal the
+" comment leader, not the leading spaces.
+
 syn case ignore
 syn sync fromstart
 
