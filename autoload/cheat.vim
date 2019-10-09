@@ -45,13 +45,6 @@ fu! cheat#close_window() abort "{{{2
     endif
 endfu
 
-fu! cheat#focus_previous_window_if_on_right() abort "{{{2
-    if s:previous_window_is_on_right()
-        wincmd p
-    else
-        wincmd l
-    endif
-endfu
 "}}}1
 " Utilities {{{1
 fu! s:cheatsheet_is_alone() abort "{{{2
@@ -59,13 +52,5 @@ fu! s:cheatsheet_is_alone() abort "{{{2
         \ && winnr('$') == 2
         \ && bufname('#') is# ''
         \ && getbufline('#', 1, 10) ==# ['']
-endfu
-
-fu! s:previous_window_is_on_right() abort "{{{2
-    let nr = winnr()
-    let rightedge_current_window = win_screenpos(nr)[1] + winwidth(nr) - 1
-    let nr = winnr('#')
-    let leftedge_previous_window = win_screenpos(nr)[1]
-    return rightedge_current_window + 1 == leftedge_previous_window - 1
 endfu
 

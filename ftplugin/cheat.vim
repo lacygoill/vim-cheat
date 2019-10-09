@@ -47,6 +47,8 @@ setl nowrap
 "
 " `'list'` is set in the second window, even when we use `bh=delete`.
 "}}}
+" TODO: What  about moving  the comments  of a  cheatsheet inside  popup windows
+" opened dynamically when hovering the relevant line?
 setl bh=hide nobl noswf ro wfw
 
 setl cms=#\ %s
@@ -64,7 +66,7 @@ augroup END
 "}}}1
 " Mappings {{{1
 
-nno <buffer><nowait><silent> <c-l> :<c-u>call cheat#focus_previous_window_if_on_right()<cr>
+nno <buffer><nowait><silent> <c-l> :<c-u>call lg#window#focus_previous_if_on_right()<cr>
 nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
 
 " teardown {{{1
