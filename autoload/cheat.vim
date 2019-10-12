@@ -4,7 +4,7 @@ endif
 let g:autoloaded_cheat = 1
 
 " Interface {{{1
-fu! cheat#open(...) abort "{{{2
+fu cheat#open(...) abort "{{{2
     let cmd = a:0 ? a:1 : 'vim'
     let file = g:cheat_dir..'/'..cmd
     if !filereadable(file)
@@ -27,13 +27,13 @@ fu! cheat#open(...) abort "{{{2
     exe 'to 43vnew '..file
 endfu
 
-fu! cheat#completion(_a, _l, _p) abort "{{{2
+fu cheat#completion(_a, _l, _p) abort "{{{2
     sil return join(map(systemlist('find '..g:cheat_dir..' -type f'),
         \ {_,v -> fnamemodify(v, ':t:r')}), "\n")
 endfu
 "}}}1
 " Core {{{1
-fu! cheat#close_window() abort "{{{2
+fu cheat#close_window() abort "{{{2
     if reg_recording() isnot# ''
         return feedkeys('q', 'in')[-1]
     endif
@@ -47,7 +47,7 @@ endfu
 
 "}}}1
 " Utilities {{{1
-fu! s:cheatsheet_is_alone() abort "{{{2
+fu s:cheatsheet_is_alone() abort "{{{2
     return tabpagenr('$') == 1
         \ && winnr('$') == 2
         \ && bufname('#') is# ''
