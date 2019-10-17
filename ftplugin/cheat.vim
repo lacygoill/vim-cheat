@@ -72,7 +72,7 @@ nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
 " teardown {{{1
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
-    \ . "
+    \ ..'
     \ | setl bh< bl< cms< cocu< cole< fdl< fdm< fdt< isk< nu< rnu< ro< spell< swf< tags< tw< wfw< wrap<
-    \ "
+    \ '
 
