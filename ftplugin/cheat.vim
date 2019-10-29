@@ -61,7 +61,17 @@ call toggle_settings#auto_open_fold('enable')
 " TODO: if you keep the autocmd, clear it in b:undo_ftplugin
 augroup cheat_open_fold
     au! * <buffer>
-    au BufWinEnter <buffer> norm! zv
+    " `zM` is important!{{{
+    "
+    " Without,  when you  press `j`  or `k`,  the folds  won't be  automatically
+    " opened/closed; at least not until you've pressed `zM`.
+    " For an explanation, see:
+    "
+    "     ~/.vim/plugged/vim-toggle-settings/autoload/toggle_settings.vim
+    "     /s:move_and_open_fold
+    "     ?Warning
+    "}}}
+    au BufWinEnter <buffer> norm! zMzv
 augroup END
 "}}}1
 " Mappings {{{1
@@ -69,10 +79,8 @@ augroup END
 nno <buffer><nowait><silent> <c-l> :<c-u>call lg#window#focus_previous_if_on_right()<cr>
 nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
 
-" teardown {{{1
+" Teardown {{{1
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
-    \ ..'
-    \ | setl bh< bl< cms< cocu< cole< fdl< fdm< fdt< isk< nu< rnu< ro< spell< swf< tags< tw< wfw< wrap<
-    \ '
+    \ ..'| setl bh< bl< cms< cocu< cole< fdl< fdm< fdt< isk< nu< rnu< ro< spell< swf< tags< tw< wfw< wrap<'
 
