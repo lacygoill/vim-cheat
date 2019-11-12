@@ -31,6 +31,29 @@ fu cheat#completion(_a, _l, _p) abort "{{{2
     sil return join(map(systemlist('find '..g:cheat_dir..' -type f'),
         \ {_,v -> fnamemodify(v, ':t:r')}), "\n")
 endfu
+
+fu cheat#undo_ftplugin() abort "{{{2
+    setl bh<
+    setl bl<
+    setl cms<
+    setl cocu<
+    setl cole<
+    setl fdl<
+    setl fdm<
+    setl fdt<
+    setl isk<
+    setl nu<
+    setl rnu<
+    setl ro<
+    setl spell<
+    setl swf<
+    setl tags<
+    setl tw<
+    setl wfw<
+    setl wrap<
+
+    nunmap <buffer> q
+endfu
 "}}}1
 " Core {{{1
 fu cheat#close_window() abort "{{{2

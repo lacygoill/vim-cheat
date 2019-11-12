@@ -52,7 +52,6 @@ setl nowrap
 setl bh=hide nobl noswf ro wfw
 
 setl cms=#\ %s
-setl et
 setl tw=40
 setl isk=@,48-57,-,/,.,192-255
 exe 'setl tags='..g:cheat_dir..'/tags'
@@ -76,11 +75,10 @@ augroup END
 "}}}1
 " Mappings {{{1
 
-nno <buffer><nowait><silent> <c-l> :<c-u>call lg#window#focus_previous_if_on_right()<cr>
 nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
 
 " Teardown {{{1
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
-    \ ..'| setl bh< bl< cms< cocu< cole< fdl< fdm< fdt< isk< nu< rnu< ro< spell< swf< tags< tw< wfw< wrap<'
+    \ ..'| call cheat#undo_ftplugin()'
 
