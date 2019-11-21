@@ -63,8 +63,9 @@ fu cheat#close_window() abort "{{{2
     if s:cheatsheet_is_alone()
         qa!
     else
-        wincmd p
-        exe winnr('#')..'q'
+        let winid = lg#win_getid('#')
+        close
+        call win_gotoid(winid)
     endif
 endfu
 
