@@ -12,17 +12,24 @@ let g:loaded_cheat = 1
 " for every  line of  code whose  purpose is  not clear,  the latter  purpose is
 " documented in `todo.md`.
 
-" Variable {{{1
+" Variables {{{1
 
 const g:cheat_dir = $HOME..'/wiki/cheat'
 
-" Command {{{1
+" Commands {{{1
 
 " We name the command `:Cs`, to be consistent with `$ cs`.
 " Note that it probably shadows `:cs` (short form of `:cscope`).
 com -bar -complete=custom,cheat#completion -nargs=? Cs call cheat#open(<f-args>)
 
-" Mapping {{{1
+" Mappings {{{1
 
 nno <silent><unique> g? :<c-u>Cs<cr>
+
+" restore Rot13 encoding (`:h g?`)
+nno <silent><unique> +?  g?
+nno <silent><unique> +?? g??
+
+" install similar mapping in visual mode for consistency
+xno <silent><unique> +? g?
 
