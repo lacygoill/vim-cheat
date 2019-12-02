@@ -28,7 +28,7 @@ fu cheat#open(...) abort "{{{2
 endfu
 
 fu cheat#completion(_a, _l, _p) abort "{{{2
-    sil return join(map(systemlist('find '..g:cheat_dir..' -type f'),
+    sil return join(map(systemlist('find '..shellescape(g:cheat_dir)..' -type f'),
         \ {_,v -> fnamemodify(v, ':t:r')}), "\n")
 endfu
 
