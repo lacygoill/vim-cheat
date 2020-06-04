@@ -68,7 +68,6 @@ fu cheat#close_window() abort "{{{2
         call win_gotoid(winid)
     endif
 endfu
-
 "}}}1
 " Utilities {{{1
 fu s:cheatsheet_is_alone() abort "{{{2
