@@ -19,7 +19,7 @@ endif
 
 syn case ignore
 syn sync fromstart
-let [s:fmr_start, s:fmr_end] = map(split(&l:fmr, ','), {_,v -> v..'\d*'})
+let [s:fmr_start, s:fmr_end] = split(&l:fmr, ',')->map({_, v -> v .. '\d*'})
 
 syn match CheatDescr           /\%1v.*\%25v./
 " Why `\%<40v` instead of `\%40v`?{{{
@@ -28,11 +28,11 @@ syn match CheatDescr           /\%1v.*\%25v./
 " In which case, the command will end somewhere before the 40th column.
 "}}}
 syn match CheatCommand         /\%26v.*\%<41v./ contains=CheatMode,CheatAngle,CheatDblAngle
-exe 'syn match CheatSection /^.*'..s:fmr_start..'$/ contains=CheatFoldMarkerStart'
-exe 'syn match CheatFoldMarkerStart /'..s:fmr_start..'/ contained conceal'
-exe 'syn match CheatFoldMarkerEnd   /^'..s:fmr_end..'$/ conceal'
-exe 'syn region CheatAbout start=/^About.*'..s:fmr_start..'$/ end=/\ze.*'..s:fmr_start..'$/'
-\ ..' keepend contains=CheatFoldMarkerStart,CheatFoldMarkerEnd,CheatTag,CheatAngle,CheatDblAngle'
+exe 'syn match CheatSection /^.*' .. s:fmr_start .. '$/ contains=CheatFoldMarkerStart'
+exe 'syn match CheatFoldMarkerStart /' .. s:fmr_start .. '/ contained conceal'
+exe 'syn match CheatFoldMarkerEnd   /^' .. s:fmr_end .. '$/ conceal'
+exe 'syn region CheatAbout start=/^About.*' .. s:fmr_start .. '$/ end=/\ze.*' .. s:fmr_start .. '$/'
+\ .. ' keepend contains=CheatFoldMarkerStart,CheatFoldMarkerEnd,CheatTag,CheatAngle,CheatDblAngle'
 
 syn match CheatTag      /`[^` \t]\+`/hs=s+1,he=e-1 contained contains=CheatBacktick,CheatRuntime
 syn match CheatBacktick /`/ contained conceal

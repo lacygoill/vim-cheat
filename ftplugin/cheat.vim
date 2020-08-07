@@ -5,7 +5,7 @@
 "
 " ---
 "
-" `wfw` is not a buffer option. Move it here?
+" `wfw` is not a buffer option.  Move it here?
 "
 " ---
 "
@@ -13,7 +13,7 @@
 " Did we write that window-local options should be set from an autocmd listening
 " to `BufWinEnter`? If not, should we?
 "}}}
-setl fdl=1 fdm=marker fdt=substitute(getline(v:foldstart),'\\s\\+{'..'{{.*$','','')
+setl fdl=1 fdm=marker fdt=getline(v:foldstart)->substitute('\\s\\+{{\\%x7b.*$','','')
 setl cocu=nc cole=3
 setl nonu nornu
 setl nospell
@@ -54,7 +54,7 @@ setl bh=hide nobl noswf ro wfw
 setl cms=#\ %s
 setl tw=40
 setl isk=@,48-57,-,/,.,192-255
-exe 'setl tags='..g:cheat_dir..'/tags'
+exe 'setl tags=' .. g:cheat_dir .. '/tags'
 
 call toggle_settings#auto_open_fold('enable')
 " TODO: if you keep the autocmd, clear it in b:undo_ftplugin
@@ -80,5 +80,5 @@ nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
 " Teardown {{{1
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
-    \ ..'| call cheat#undo_ftplugin()'
+    \ .. '| call cheat#undo_ftplugin()'
 

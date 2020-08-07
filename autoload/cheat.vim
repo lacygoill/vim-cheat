@@ -3,18 +3,22 @@ if exists('g:autoloaded_cheat')
 endif
 let g:autoloaded_cheat = 1
 
+import Win_getid from 'lg.vim'
+
 " Interface {{{1
 fu cheat#open(...) abort "{{{2
     let cmd = a:0 ? a:1 : 'vim'
-    let file = g:cheat_dir..'/'..cmd
+    let file = g:cheat_dir .. '/' .. cmd
     if !filereadable(file)
-        echo '[cheat] '..file..' is not readable'
+        echo '[cheat] ' .. file .. ' is not readable'
         return
     endif
     let index_of_existing_cheat_window =
-        \ index(map(range(1, winnr('$')), {_,v -> getwinvar(v, '&ft')}), 'cheat')
+        \ range(1, winnr('$'))
+        \ ->map({_, v -> getwinvar(v, '&ft')})
+        \ ->index('cheat')
     if index_of_existing_cheat_window >= 0
-        exe index_of_existing_cheat_window..'close'
+        exe index_of_existing_cheat_window .. 'close'
     endif
     " Why 43 instead of 40?{{{
     "
@@ -24,12 +28,13 @@ fu cheat#open(...) abort "{{{2
     "
     " If you want to use `40vnew`, reset `'scl'` in the filetype plugin.
     "}}}
-    exe 'to 43vnew '..file
+    exe 'to 43vnew ' .. file
 endfu
 
 fu cheat#completion(_a, _l, _p) abort "{{{2
-    sil return join(map(systemlist('find '..shellescape(g:cheat_dir)..' -type f'),
-        \ {_,v -> fnamemodify(v, ':t:r')}), "\n")
+    sil return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
+        \ ->map({_, v -> fnamemodify(v, ':t:r')})
+        \ ->join("\n")
 endfu
 
 fu cheat#undo_ftplugin() abort "{{{2
@@ -57,13 +62,13 @@ endfu
 "}}}1
 " Core {{{1
 fu cheat#close_window() abort "{{{2
-    if reg_recording() isnot# ''
+    if reg_recording() != ''
         return feedkeys('q', 'in')[-1]
     endif
     if s:cheatsheet_is_alone()
         qa!
     else
-        let winid = lg#win_getid('#')
+        let winid = s:Win_getid('#')
         close
         call win_gotoid(winid)
     endif
@@ -73,7 +78,7 @@ endfu
 fu s:cheatsheet_is_alone() abort "{{{2
     return tabpagenr('$') == 1
         \ && winnr('$') == 2
-        \ && bufname('#') is# ''
+        \ && bufname('#') == ''
         \ && getbufline('#', 1, 10) ==# ['']
 endfu
 

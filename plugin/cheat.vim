@@ -14,7 +14,7 @@ let g:loaded_cheat = 1
 
 " Variables {{{1
 
-const g:cheat_dir = $HOME..'/wiki/cheat'
+const g:cheat_dir = $HOME .. '/wiki/cheat'
 
 " Commands {{{1
 
