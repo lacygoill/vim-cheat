@@ -20,7 +20,7 @@ const g:cheat_dir = $HOME .. '/wiki/cheat'
 
 " We name the command `:Cs`, to be consistent with `$ cs`.
 " Note that it probably shadows `:cs` (short form of `:cscope`).
-com -bar -complete=custom,cheat#completion -nargs=? Cs call cheat#open(<f-args>)
+com -bar -nargs=? -complete=custom,cheat#completion Cs call cheat#open(<f-args>)
 
 " Mappings {{{1
 

@@ -38,24 +38,24 @@ fu cheat#completion(_a, _l, _p) abort "{{{2
 endfu
 
 fu cheat#undo_ftplugin() abort "{{{2
-    setl bh<
-    setl bl<
-    setl cms<
-    setl cocu<
-    setl cole<
-    setl fdl<
-    setl fdm<
-    setl fdt<
-    setl isk<
-    setl nu<
-    setl rnu<
-    setl ro<
-    setl spell<
-    setl swf<
-    setl tags<
-    setl tw<
-    setl wfw<
-    setl wrap<
+    set bh<
+    set bl<
+    set cms<
+    set cocu<
+    set cole<
+    set fdl<
+    set fdm<
+    set fdt<
+    set isk<
+    set nu<
+    set rnu<
+    set ro<
+    set spell<
+    set swf<
+    set tags<
+    set tw<
+    set wfw<
+    set wrap<
 
     nunmap <buffer> q
 endfu
