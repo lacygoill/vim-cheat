@@ -20,15 +20,15 @@ fu cheat#open(...) abort "{{{2
     if index_of_existing_cheat_window >= 0
         exe index_of_existing_cheat_window .. 'close'
     endif
-    " Why 43 instead of 40?{{{
+    " Why 53 instead of 50?{{{
     "
     " Because we set `'signcolumn'` in our vimrc.
     " Because of  this, 3 cells  are consumed by the  sign column (2  on the
     " left, one on the right).
     "
-    " If you want to use `40vnew`, reset `'scl'` in the filetype plugin.
+    " If you want to use `50vnew`, reset `'scl'` in the filetype plugin.
     "}}}
-    exe 'to 43vnew ' .. file
+    exe 'to 53vnew ' .. file
 endfu
 
 fu cheat#completion(_a, _l, _p) abort "{{{2

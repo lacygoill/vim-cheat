@@ -21,13 +21,13 @@ syn case ignore
 syn sync fromstart
 let [s:fmr_start, s:fmr_end] = split(&l:fmr, ',')->map({_, v -> v .. '\d*'})
 
-syn match CheatDescr           /\%1v.*\%25v./
-" Why `\%<40v` instead of `\%40v`?{{{
+syn match CheatDescr           /\%1v.*\%35v./
+" Why `\%<50v` instead of `\%50v`?{{{
 "
-" There could be no mode character in the 40th column.
-" In which case, the command will end somewhere before the 40th column.
+" There could be no mode character in the 50th column.
+" In which case, the command will end somewhere before the 50th column.
 "}}}
-syn match CheatCommand         /\%26v.*\%<41v./ contains=CheatMode,CheatAngle,CheatDblAngle
+syn match CheatCommand         /\%36v.*\%<51v./ contains=CheatMode,CheatAngle,CheatDblAngle
 exe 'syn match CheatSection /^.*' .. s:fmr_start .. '$/ contains=CheatFoldMarkerStart'
 exe 'syn match CheatFoldMarkerStart /' .. s:fmr_start .. '/ contained conceal'
 exe 'syn match CheatFoldMarkerEnd   /^' .. s:fmr_end .. '$/ conceal'
@@ -36,7 +36,7 @@ exe 'syn region CheatAbout start=/^About.*' .. s:fmr_start .. '$/ end=/\ze.*' ..
 
 syn match CheatTag      /`[^` \t]\+`/hs=s+1,he=e-1 contained contains=CheatBacktick,CheatRuntime
 syn match CheatBacktick /`/ contained conceal
-syn match CheatMode     /[NICVTOM*]\+\%>40v/ contained
+syn match CheatMode     /[NICVTOM*]\+\%>50v/ contained
 syn match CheatAngle    /‹[^› \t]\+›/ contained
 syn match CheatDblAngle /«[^» \t]\+»/ contained
 syn match CheatComment  /^#.*$/ contains=CheatHash,CheatFoldMarkerStart
