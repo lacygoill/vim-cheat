@@ -24,12 +24,12 @@ com -bar -nargs=? -complete=custom,cheat#completion Cs call cheat#open(<f-args>)
 
 " Mappings {{{1
 
-nno <silent><unique> g? :<c-u>Cs<cr>
+nno <unique> g? <cmd>Cs<cr>
 
 " restore Rot13 encoding (`:h g?`)
-nno <silent><unique> +?  g?
-nno <silent><unique> +?? g??
+nno <unique> +?  g?
+nno <unique> +?? g??
 
 " install similar mapping in visual mode for consistency
-xno <silent><unique> +? g?
+xno <unique> +? g?
 

@@ -75,7 +75,7 @@ augroup END
 "}}}1
 " Mappings {{{1
 
-nno <buffer><nowait><silent> q :<c-u>call cheat#close_window()<cr>
+nno <buffer><nowait> q <cmd>call cheat#close_window()<cr>
 
 " Teardown {{{1
 
