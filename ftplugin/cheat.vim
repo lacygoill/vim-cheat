@@ -58,7 +58,7 @@ exe 'setl tags=' .. g:cheat_dir .. '/tags'
 
 call toggle_settings#auto_open_fold('enable')
 " TODO: if you keep the autocmd, clear it in b:undo_ftplugin
-augroup cheat_open_fold
+augroup CheatOpenFold
     au! * <buffer>
     " `zM` is important!{{{
     "
