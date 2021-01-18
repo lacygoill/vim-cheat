@@ -1,43 +1,42 @@
-if exists('g:autoloaded_cheat')
-    finish
-endif
-let g:autoloaded_cheat = 1
+vim9 noclear
+
+if exists('loaded') | finish | endif
+var loaded = true
 
 import Win_getid from 'lg.vim'
 
-" Interface {{{1
-fu cheat#open(...) abort "{{{2
-    let cmd = a:0 ? a:1 : 'vim'
-    let file = g:cheat_dir .. '/' .. cmd
+# Interface {{{1
+def cheat#open(cmd: string) #{{{2
+    var file: string = g:cheat_dir .. '/' .. (cmd == '' ? 'vim' : cmd)
     if !filereadable(file)
         echo '[cheat] ' .. file .. ' is not readable'
         return
     endif
-    let index_of_existing_cheat_window =
-        \ range(1, winnr('$'))
-        \ ->map({_, v -> getwinvar(v, '&ft')})
-        \ ->index('cheat')
+    var index_of_existing_cheat_window: number =
+        range(1, winnr('$'))
+            ->mapnew((_, v) => getwinvar(v, '&ft'))
+            ->index('cheat')
     if index_of_existing_cheat_window >= 0
         exe index_of_existing_cheat_window .. 'close'
     endif
-    " Why 53 instead of 50?{{{
-    "
-    " Because we set `'signcolumn'` in our vimrc.
-    " Because of  this, 3 cells  are consumed by the  sign column (2  on the
-    " left, one on the right).
-    "
-    " If you want to use `50vnew`, reset `'scl'` in the filetype plugin.
-    "}}}
-    exe 'to 53vnew ' .. file
-endfu
+    # Why 53 instead of 50?{{{
+    #
+    # Because we set `'signcolumn'` in our vimrc.
+    # Because of  this, 3 cells  are consumed by the  sign column (2  on the
+    # left, one on the right).
+    #
+    # If you want to use `50vnew`, reset `'scl'` in the filetype plugin.
+    #}}}
+    exe 'to :53vnew ' .. file
+enddef
 
-fu cheat#completion(_a, _l, _p) abort "{{{2
+def cheat#completion(...l: any): string #{{{2
     sil return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
-        \ ->map({_, v -> fnamemodify(v, ':t:r')})
-        \ ->join("\n")
-endfu
+        ->map((_, v) => fnamemodify(v, ':t:r'))
+        ->join("\n")
+enddef
 
-fu cheat#undo_ftplugin() abort "{{{2
+def cheat#undoFtplugin() #{{{2
     set bh<
     set bl<
     set cms<
@@ -58,27 +57,28 @@ fu cheat#undo_ftplugin() abort "{{{2
     set wrap<
 
     nunmap <buffer> q
-endfu
-"}}}1
-" Core {{{1
-fu cheat#close_window() abort "{{{2
+enddef
+#}}}1
+# Core {{{1
+def cheat#closeWindow() #{{{2
     if reg_recording() != ''
-        return feedkeys('q', 'in')[-1]
+        feedkeys('q', 'in')
+        return
     endif
-    if s:cheatsheet_is_alone()
+    if CheatsheetIsAlone()
         qa!
     else
-        let winid = s:Win_getid('#')
+        var winid: number = Win_getid('#')
         close
-        call win_gotoid(winid)
+        win_gotoid(winid)
     endif
-endfu
-"}}}1
-" Utilities {{{1
-fu s:cheatsheet_is_alone() abort "{{{2
+enddef
+#}}}1
+# Utilities {{{1
+def CheatsheetIsAlone(): bool #{{{2
     return tabpagenr('$') == 1
-        \ && winnr('$') == 2
-        \ && bufname('#') == ''
-        \ && getbufline('#', 1, 10) ==# ['']
-endfu
+        && winnr('$') == 2
+        && bufname('#') == ''
+        && getbufline('#', 1, 10) == ['']
+enddef
 

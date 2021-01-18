@@ -56,7 +56,7 @@ setl tw=40
 setl isk=@,48-57,-,/,.,192-255
 exe 'setl tags=' .. g:cheat_dir .. '/tags'
 
-call toggle_settings#auto_open_fold('enable')
+call toggle_settings#autoOpenFold(v:true)
 " TODO: if you keep the autocmd, clear it in b:undo_ftplugin
 augroup CheatOpenFold
     au! * <buffer>
@@ -75,10 +75,10 @@ augroup END
 "}}}1
 " Mappings {{{1
 
-nno <buffer><nowait> q <cmd>call cheat#close_window()<cr>
+nno <buffer><nowait> q <cmd>call cheat#closeWindow()<cr>
 
 " Teardown {{{1
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
-    \ .. '| call cheat#undo_ftplugin()'
+    \ .. '| call cheat#undoFtplugin()'
 
