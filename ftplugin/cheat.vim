@@ -67,7 +67,7 @@ augroup CheatOpenFold
     " For an explanation, see:
     "
     "     ~/.vim/plugged/vim-toggle-settings/autoload/toggle_settings.vim
-    "     /s:move_and_open_fold
+    "     /MoveAndOpenFold
     "     ?Warning
     "}}}
     au BufWinEnter <buffer> norm! zMzv
