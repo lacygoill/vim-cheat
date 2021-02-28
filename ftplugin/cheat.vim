@@ -56,7 +56,7 @@ setl tw=40
 setl isk=@,48-57,-,/,.,192-255
 exe 'setl tags=' .. g:cheat_dir .. '/tags'
 
-call toggle_settings#autoOpenFold(v:true)
+call toggleSettings#autoOpenFold(v:true)
 " TODO: if you keep the autocmd, clear it in b:undo_ftplugin
 augroup CheatOpenFold
     au! * <buffer>
@@ -66,7 +66,7 @@ augroup CheatOpenFold
     " opened/closed; at least not until you've pressed `zM`.
     " For an explanation, see:
     "
-    "     ~/.vim/plugged/vim-toggle-settings/autoload/toggle_settings.vim
+    "     ~/.vim/plugged/vim-toggle-settings/autoload/toggleSettings.vim
     "     /MoveAndOpenFold
     "     ?Warning
     "}}}
