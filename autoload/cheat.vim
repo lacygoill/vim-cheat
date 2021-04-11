@@ -30,7 +30,7 @@ def cheat#open(cmd: string) #{{{2
     exe 'to :53vnew ' .. file
 enddef
 
-def cheat#completion(...l: any): string #{{{2
+def cheat#completion(_, _, _): string #{{{2
     sil return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
         ->map((_, v: string): string => fnamemodify(v, ':t:r'))
         ->join("\n")
