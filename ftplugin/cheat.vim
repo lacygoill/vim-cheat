@@ -66,7 +66,7 @@ augroup CheatOpenFold
     " opened/closed; at least not until you've pressed `zM`.
     " For an explanation, see:
     "
-    "     ~/.vim/plugged/vim-toggle-settings/autoload/toggleSettings.vim
+    "     ~/.vim/pack/mine/opt/toggleSettings/plugin/toggleSettings.vim
     "     /MoveAndOpenFold
     "     ?Warning
     "}}}

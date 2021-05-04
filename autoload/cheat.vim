@@ -14,7 +14,7 @@ def cheat#open(cmd: string) #{{{2
     endif
     var index_of_existing_cheat_window: number =
         range(1, winnr('$'))
-            ->mapnew((_, v: number): string => getwinvar(v, '&ft'))
+            ->mapnew((_, v: number): string => getwinvar(v, '&filetype'))
             ->index('cheat')
     if index_of_existing_cheat_window >= 0
         exe index_of_existing_cheat_window .. 'close'
@@ -32,7 +32,7 @@ enddef
 
 def cheat#completion(_, _, _): string #{{{2
     sil return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
-        ->map((_, v: string): string => fnamemodify(v, ':t:r'))
+        ->map((_, v: string): string => v->fnamemodify(':t:r'))
         ->join("\n")
 enddef
 
