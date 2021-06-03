@@ -43,20 +43,20 @@ syn match CheatComment  /^#.*$/ contains=CheatHash,CheatFoldMarkerStart
 syn match CheatHash     /^#\s\=/ contained conceal
 syn match CheatRuntime  +\$VIMRUNTIME/doc/+ contained conceal
 
-hi link CheatDescr           Normal
-hi link CheatCommand         Constant
-hi link CheatSection         Title
-hi link CheatAbout           Comment
-hi link CheatFoldMarkerStart Ignore
-hi link CheatFoldMarkerEnd   Ignore
-hi link CheatTag             Tag
-hi link CheatBacktick        Ignore
-hi link CheatMode            Type
-hi link CheatAngle           Identifier
-hi link CheatDblAngle        Label
-hi link CheatComment         Comment
-hi link CheatHash            Ignore
-hi link CheatRuntime         Ignore
+hi def link CheatDescr           Normal
+hi def link CheatCommand         Constant
+hi def link CheatSection         Title
+hi def link CheatAbout           Comment
+hi def link CheatFoldMarkerStart Ignore
+hi def link CheatFoldMarkerEnd   Ignore
+hi def link CheatTag             Tag
+hi def link CheatBacktick        Ignore
+hi def link CheatMode            Type
+hi def link CheatAngle           Identifier
+hi def link CheatDblAngle        Label
+hi def link CheatComment         Comment
+hi def link CheatHash            Ignore
+hi def link CheatRuntime         Ignore
 
 let b:current_syntax = 'cheat'
 
