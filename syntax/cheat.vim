@@ -1,32 +1,38 @@
+vim9script
+
 if exists('b:current_syntax')
     finish
 endif
 
-" TODO: Conceal some syntax items installed by `vim-lg`.
-" Mainly (are there others?) `cheatCommentLeader` and `cheatCommentCodeBlock`.
-"
-" You could try sth like:
-"
-"     syn match cheatCommentLeader /\%(^\s*\)\@<=#/ contained conceal
-"                                                             ^-----^
-"
-"     syn region cheatCommentCodeBlock matchgroup=Comment start=/# \{5,}/ end=/$/ concealends contained oneline keepend containedin=CheatComment
-"                                                                                 ^---------^
-"
-" But I don't think it can be run from this script; it needs to be run later.
-" Also, regarding `cheatCommentCodeBlock`, it would  be nice to only conceal the
-" comment leader, not the leading spaces.
+# TODO: Conceal some syntax items installed by `vim-lg`.
+# Mainly (are there others?) `cheatCommentLeader` and `cheatCommentCodeBlock`.
+#
+# You could try sth like:
+#
+#     syn match cheatCommentLeader /\%(^\s*\)\@<=#/ contained conceal
+#                                                             ^-----^
+#
+#     syn region cheatCommentCodeBlock matchgroup=Comment start=/# \{5,}/ end=/$/ concealends contained oneline keepend containedin=CheatComment
+#                                                                                 ^---------^
+#
+# But I don't think it can be run from this script; it needs to be run later.
+# Also, regarding `cheatCommentCodeBlock`, it would  be nice to only conceal the
+# comment leader, not the leading spaces.
 
 syn case ignore
 syn sync fromstart
-let [s:fmr_start, s:fmr_end] = split(&l:fmr, ',')->map({_, v -> v .. '\d*'})
+var fmr_start: string
+var fmr_end: string
+[fmr_start, fmr_end] = &l:foldmarker
+    ->split(',')
+    ->map((_, v: string): string => v .. '\d*')
 
 syn match CheatDescr           /\%1v.*\%35v./
-" Why `\%<50v` instead of `\%50v`?{{{
-"
-" There could be no mode character in the 50th column.
-" In which case, the command will end somewhere before the 50th column.
-"}}}
+# Why `\%<50v` instead of `\%50v`?{{{
+#
+# There could be no mode character in the 50th column.
+# In which case, the command will end somewhere before the 50th column.
+#}}}
 syn match CheatCommand         /\%36v.*\%<51v./ contains=CheatMode,CheatAngle,CheatDblAngle
 exe 'syn match CheatSection /^.*' .. s:fmr_start .. '$/ contains=CheatFoldMarkerStart'
 exe 'syn match CheatFoldMarkerStart /' .. s:fmr_start .. '/ contained conceal'
@@ -58,5 +64,5 @@ hi def link CheatComment         Comment
 hi def link CheatHash            Ignore
 hi def link CheatRuntime         Ignore
 
-let b:current_syntax = 'cheat'
+b:current_syntax = 'cheat'
 

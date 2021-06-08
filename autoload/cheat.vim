@@ -25,7 +25,7 @@ def cheat#open(cmd: string) #{{{2
     # Because of  this, 3 cells  are consumed by the  sign column (2  on the
     # left, one on the right).
     #
-    # If you want to use `50vnew`, reset `'scl'` in the filetype plugin.
+    # If you want to use `50vnew`, reset `'signcolumn'` in the filetype plugin.
     #}}}
     exe 'to :53vnew ' .. file
 enddef
@@ -37,23 +37,23 @@ def cheat#completion(_, _, _): string #{{{2
 enddef
 
 def cheat#undoFtplugin() #{{{2
-    set bh<
-    set bl<
-    set cms<
-    set cocu<
-    set cole<
-    set fdl<
-    set fdm<
-    set fdt<
-    set isk<
-    set nu<
-    set rnu<
-    set ro<
+    set bufhidden<
+    set buflisted<
+    set commentstring<
+    set concealcursor<
+    set conceallevel<
+    set foldlevel<
+    set foldmethod<
+    set foldtext<
+    set iskeyword<
+    set number<
+    set relativenumber<
+    set readonly<
     set spell<
-    set swf<
+    set swapfile<
     set tags<
-    set tw<
-    set wfw<
+    set textwidth<
+    set winfixwidth<
     set wrap<
 
     nunmap <buffer> q
