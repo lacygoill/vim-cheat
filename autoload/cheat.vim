@@ -27,7 +27,7 @@ def cheat#open(cmd: string) #{{{2
     #
     # If you want to use `50vnew`, reset `'signcolumn'` in the filetype plugin.
     #}}}
-    exe 'to :53vnew ' .. file
+    exe 'to :53 vnew ' .. file
 enddef
 
 def cheat#completion(_, _, _): string #{{{2
