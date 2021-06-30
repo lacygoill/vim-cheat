@@ -20,16 +20,16 @@ const g:cheat_dir = $HOME .. '/wiki/cheat'
 
 # We name the command `:Cs`, to be consistent with `$ cs`.
 # Note that it probably shadows `:cs` (short form of `:cscope`).
-com -bar -nargs=? -complete=custom,cheat#completion Cs cheat#open(<q-args>)
+command -bar -nargs=? -complete=custom,cheat#completion Cs cheat#open(<q-args>)
 
 # Mappings {{{1
 
-nno <unique> g? <cmd>Cs<cr>
+nnoremap <unique> g? <Cmd>Cs<CR>
 
-# restore Rot13 encoding (`:h g?`)
-nno <unique> +?  g?
-nno <unique> +?? g??
+# restore Rot13 encoding (`:help g?`)
+nnoremap <unique> +?  g?
+nnoremap <unique> +?? g??
 
 # install similar mapping in visual mode for consistency
-xno <unique> +? g?
+xnoremap <unique> +? g?
 

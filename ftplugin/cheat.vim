@@ -48,7 +48,7 @@ vim9script
 # It doesn't seem to cause an issue:
 #
 #     $ cs tmux
-#     :setl list
+#     :setlocal list
 #     C-l
 #     C-^
 #
@@ -70,7 +70,7 @@ vim9script
 toggleSettings#autoOpenFold(v:true)
 # TODO: if you keep the autocmd, clear it in b:undo_ftplugin
 augroup CheatOpenFold
-    au! * <buffer>
+    autocmd! * <buffer>
     # `zM` is important!{{{
     #
     # Without,  when you  press `j`  or `k`,  the folds  won't be  automatically
@@ -81,15 +81,15 @@ augroup CheatOpenFold
     #     /MoveAndOpenFold
     #     ?Warning
     #}}}
-    au BufWinEnter <buffer> norm! zMzv
+    autocmd BufWinEnter <buffer> normal! zMzv
 augroup END
 #}}}1
 # Mappings {{{1
 
-nno <buffer><nowait> q <cmd>call cheat#closeWindow()<cr>
+nnoremap <buffer><nowait> q <Cmd>call cheat#closeWindow()<CR>
 
 # Teardown {{{1
 
-b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
+b:undo_ftplugin = get(b:, 'undo_ftplugin', 'execute')
     .. '| call cheat#undoFtplugin()'
 

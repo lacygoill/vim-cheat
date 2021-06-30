@@ -17,7 +17,7 @@ def cheat#open(cmd: string) #{{{2
             ->mapnew((_, v: number): string => getwinvar(v, '&filetype'))
             ->index('cheat')
     if index_of_existing_cheat_window >= 0
-        exe index_of_existing_cheat_window .. 'close'
+        execute index_of_existing_cheat_window .. 'close'
     endif
     # Why 53 instead of 50?{{{
     #
@@ -27,11 +27,11 @@ def cheat#open(cmd: string) #{{{2
     #
     # If you want to use `50vnew`, reset `'signcolumn'` in the filetype plugin.
     #}}}
-    exe 'to :53 vnew ' .. file
+    execute 'topleft :53 vnew ' .. file
 enddef
 
 def cheat#completion(_, _, _): string #{{{2
-    sil return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
+    silent return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
         ->map((_, v: string): string => v->fnamemodify(':t:r'))
         ->join("\n")
 enddef
@@ -66,7 +66,7 @@ def cheat#closeWindow() #{{{2
         return
     endif
     if CheatsheetIsAlone()
-        qa!
+        quitall!
     else
         var winid: number = Win_getid('#')
         close

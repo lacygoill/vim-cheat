@@ -1,3 +1,3 @@
 vim9script noclear
 
-au BufRead,BufNewFile $HOME/wiki/cheat/* setf cheat
+autocmd BufRead,BufNewFile $HOME/wiki/cheat/* setfiletype cheat
