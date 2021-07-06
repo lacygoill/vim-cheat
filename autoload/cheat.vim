@@ -1,8 +1,5 @@
 vim9script noclear
 
-if exists('loaded') | finish | endif
-var loaded = true
-
 import Win_getid from 'lg.vim'
 
 # Interface {{{1
@@ -25,14 +22,14 @@ def cheat#open(cmd: string) #{{{2
     # Because of  this, 3 cells  are consumed by the  sign column (2  on the
     # left, one on the right).
     #
-    # If you want to use `50vnew`, reset `'signcolumn'` in the filetype plugin.
+    # If you want to use `:50 vnew`, reset `'signcolumn'` in the filetype plugin.
     #}}}
     execute 'topleft :53 vnew ' .. file
 enddef
 
 def cheat#completion(_, _, _): string #{{{2
     silent return systemlist('find ' .. shellescape(g:cheat_dir) .. ' -type f')
-        ->map((_, v: string): string => v->fnamemodify(':t:r'))
+        ->map((_, v: string) => v->fnamemodify(':t:r'))
         ->join("\n")
 enddef
 

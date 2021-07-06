@@ -25,7 +25,7 @@ var fmr_start: string
 var fmr_end: string
 [fmr_start, fmr_end] = &l:foldmarker
     ->split(',')
-    ->map((_, v: string): string => v .. '\d*')
+    ->map((_, v: string) => v .. '\d*')
 
 syntax match CheatDescr           /\%1v.*\%35v./
 # Why `\%<50v` instead of `\%50v`?{{{
